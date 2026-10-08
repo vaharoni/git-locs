@@ -1,0 +1,9 @@
+# Copy to repos.yaml, or let discover_repos.py create it.
+# discover_repos.py adds new repos as TODO; collect_stats.py fills first_commit.
+# Replace every TODO with a mapping. Only `path` is required.
+repos:
+  octocat/hello-world:
+    path: ~/workspace/hello-world   # local clone (absolute, ~, or relative to this file)
+    branch: main                    # optional, default main; stats are read from origin/<branch>
+    first_commit: '2025-10-17'      # optional, computed by collect_stats.py if missing
+  octocat/spoon-knife: TODO         # collect_stats.py refuses to run until this is replaced

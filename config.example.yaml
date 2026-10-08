@@ -1,0 +1,45 @@
+# Shared configuration for discover_repos.py (script A) and collect_stats.py (script B).
+# Run either with:  uv run discover_repos.py   /   uv run collect_stats.py
+
+months:
+  from: 2026-01        # first month to cover (YYYY-MM)
+  to: null             # last month, null = current month
+
+# A month is treated as final once this many months have passed since its end.
+# Until then its cache is rebuilt on every run (late merges can still land in it).
+lookback_months: 2
+
+# Local git matches commits by author; list every email you commit with.
+author_emails:
+  - you@example.com
+  - you@work.example.com
+
+# Only files with these extensions are counted (case-insensitive). Empty or missing = count all files.
+include_extensions:
+  - .py
+  - .ts
+  - .tsx
+  - .js
+  - .jsx
+  - .mjs
+  - .cjs
+  - .sql
+  - .prisma
+  - .sh
+  - .css
+  - .scss
+  - .liquid
+  - .hb
+
+# Paths matching any of these globs are ignored even if their extension is included
+# (fnmatch on the full path, `*` also matches `/`). Use for generated or vendored source.
+exclude_paths:
+  - "*.min.js"
+  - "*.min.css"
+  - "*/node_modules/*"
+  - "*/vendor/*"
+  - "*/dist/*"
+
+repos_file: repos.yaml   # maintained by script A, enriched by script B
+cache_dir: cache         # one JSON file per month
+html_out: stats.html     # self-contained report written by script B
